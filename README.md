@@ -32,8 +32,7 @@ hook‑konflikter genom att separera komponentträd.
      │    ├── Display.jsx
      │    ├── CounterJotai.jsx
      │    ├── DisplayJotai.jsx
-     │    ├── LocalStateSection.jsx
-     │    └── JotaiStateSection.jsx
+
 
 ------------------------------------------------------------------------
 
@@ -68,12 +67,19 @@ Här kan flera komponenter dela samma värde utan prop‑drilling.
 
 ## 🧱 App.jsx
 
-För att undvika hook‑konflikter separeras de två varianterna:
+Du behöver inte ens undvika hook‑konflikter med denna typ av uppbyggnad av koden:
 
 ``` jsx
-<LocalStateSection />
-<hr />
-<JotaiStateSection />
+<section style={{ marginBottom: '2rem' }}>
+    <h2>useState-variant</h2>
+    <Counter count={count} setCount={setCount} />
+    <Display count={count} />
+</section>
+<section style={{ marginBottom: '2rem' }}>
+    <h2>Jotai variant</h2>
+    <CounterJotai />
+    <DisplayJotai />
+</section>
 ```
 
 ------------------------------------------------------------------------
@@ -89,11 +95,3 @@ npm run dev
 <http://localhost:5173>.
 
 ------------------------------------------------------------------------
-
-## ✅ Lärdomar
-
--   `useState` använder hakparenteser `[]` för array‑destrukturering.
--   `useAtom` fungerar på samma sätt men globalt via en atom.
--   `{}` används när man destrukturerar objekt (t.ex. props).
--   Separera lokalt och globalt state för att undvika
-    React‑hook‑konflikter.
