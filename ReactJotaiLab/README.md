@@ -1,16 +1,99 @@
-# React + Vite
+﻿# React + Jotai Lab
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Den här övningen visar skillnaden mellan **lokalt state med `useState`**
+och **globalt state med Jotai (`useAtom`)** i ett Vite + React‑projekt.
 
-Currently, two official plugins are available:
+------------------------------------------------------------------------
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🎯 Syfte
 
-## React Compiler
+Att förstå hur man: - använder Reacts `useState` för lokalt state, -
+använder Jotai‑atomer för globalt, delat state, - undviker
+hook‑konflikter genom att separera komponentträd.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+------------------------------------------------------------------------
 
-## Expanding the ESLint configuration
+## ⚙️ Förutsättningar
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+-   Node.js (LTS)
+-   Visual Studio 2022 eller valfri editor
+-   Vite installerat (`npm create vite@latest`)
+
+------------------------------------------------------------------------
+
+## 🧩 Projektstruktur
+
+    src/
+     ├── App.jsx
+     ├── atoms/
+     │    └── counterAtom.js
+     ├── components/
+     │    ├── Counter.jsx
+     │    ├── Display.jsx
+     │    ├── CounterJotai.jsx
+     │    ├── DisplayJotai.jsx
+     │    ├── LocalStateSection.jsx
+     │    └── JotaiStateSection.jsx
+
+------------------------------------------------------------------------
+
+## 🧠 useState‑varianten
+
+``` jsx
+const [count, setCount] = useState(0)
+```
+
+State hanteras lokalt i komponentträdet och skickas vidare som props:
+
+``` jsx
+<Counter count={count} setCount={setCount} />
+<Display count={count} />
+```
+
+------------------------------------------------------------------------
+
+## 🌐 Jotai‑varianten
+
+``` js
+export const counterAtom = atom(0)
+```
+
+``` jsx
+const [count, setCount] = useAtom(counterAtom)
+```
+
+Här kan flera komponenter dela samma värde utan prop‑drilling.
+
+------------------------------------------------------------------------
+
+## 🧱 App.jsx
+
+För att undvika hook‑konflikter separeras de två varianterna:
+
+``` jsx
+<LocalStateSection />
+<hr />
+<JotaiStateSection />
+```
+
+------------------------------------------------------------------------
+
+## 🚀 Kör projektet
+
+``` bash
+npm install
+npm run dev
+```
+
+Öppna webbläsaren på den adress Vite visar, vanligtvis
+<http://localhost:5173>.
+
+------------------------------------------------------------------------
+
+## ✅ Lärdomar
+
+-   `useState` använder hakparenteser `[]` för array‑destrukturering.
+-   `useAtom` fungerar på samma sätt men globalt via en atom.
+-   `{}` används när man destrukturerar objekt (t.ex. props).
+-   Separera lokalt och globalt state för att undvika
+    React‑hook‑konflikter.
