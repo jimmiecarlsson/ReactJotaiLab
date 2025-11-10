@@ -1,9 +1,9 @@
 ﻿
 import React from 'react'
 
-const Display = () => {
+const Display = ({ count }) => {
     return (
-        <div>Display komponent</div>
+        <p>Nuvarande värde: { count }</p>
     )
 }
 
