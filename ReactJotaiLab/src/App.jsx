@@ -1,9 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.css'
 import CounterJotai from './components/CounterJotai'
 import DisplayJotai from './components/DisplayJotai'
+
 import Counter from './components/Counter'
 import Display from './components/Display'
+
+import Theme from './components/Theme'
+
 
 
 function App() {
@@ -13,18 +17,18 @@ function App() {
 
 
   return (
-      <>  
-          <section style={{ marginBottom: '2rem' }}>
-              <h2>useState-variant</h2>
-              <Counter count={count} setCount={setCount} />
-              <Display count={count} />
-          </section>
-          <section style={{ marginBottom: '2rem' }}>
-              <h2>Jotai variant</h2>
-              <CounterJotai />
-              <DisplayJotai />
-          </section>
-          
+    <>     
+        <section style={{ marginBottom: '2rem' }}>
+            <h2>useState-variant</h2>
+            <Counter count={count} setCount={setCount} />
+            <Display count={count} />
+        </section>
+        <section style={{ marginBottom: '2rem' }}>
+            <h2>Jotai variant</h2>
+            <CounterJotai />
+            <DisplayJotai />
+        </section>
+          <Theme />
     </>
   )
 }

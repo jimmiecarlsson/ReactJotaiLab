@@ -1,13 +1,11 @@
 ﻿
 import React from 'react'
 import { useAtom } from "jotai"
-import { counterAtom } from "../atoms/counterAtom"
+import { useCounter } from "../atoms/collectionAtoms"
 
 const CounterJotai = () => {
 
-    const [ count, setCount ] = useAtom(counterAtom)
-
-    console.log('counterAtom (Jotai):', counterAtom)
+    const [count, setCount] = useCounter()
 
     return (
         <>

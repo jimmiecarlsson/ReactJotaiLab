@@ -1,7 +1,7 @@
 ﻿
 import React from 'react'
 import { useAtomValue } from 'jotai'
-import { counterAtom } from '../atoms/counterAtom'
+import { counterAtom } from '../atoms/collectionAtoms'
 
 
 
